@@ -1,0 +1,104 @@
+#include "std_lib_facilities.h"
+#include "Card.h"
+#include "CardDeck.h"
+
+
+string suitToString(Suit s)
+{
+	string type;
+	switch (s) {
+	case Suit::clubs: type = "clubs"; break;
+	case Suit::diamonds: type = "diamonds"; break;
+	case Suit::hearts: type = "hearts"; break;
+	case Suit::spades: type = "spades"; break;
+	}
+	return type;
+}
+
+string rankToString(Rank r)
+{
+	string verdi;
+	switch (r) {
+	case Rank::two: verdi = "two"; break;
+	case Rank::three: verdi = "three"; break;
+	case Rank::four: verdi = "four"; break;
+	case Rank::five: verdi = "five"; break;
+	case Rank::six: verdi = "six"; break;
+	case Rank::seven: verdi = "seven"; break;
+	case Rank::eight: verdi = "eight"; break;
+	case Rank::nine: verdi = "nine"; break;
+	case Rank::ten: verdi = "ten"; break;
+	case Rank::jack: verdi = "jack"; break;
+	case Rank::queen: verdi = "queen"; break;
+	case Rank::king: verdi = "king"; break;
+	case Rank::ace: verdi = "ace"; break;
+	}
+	return verdi;
+}
+
+string toString(CardStruct card)
+{
+	string farge = suitToString(card.s);
+	string verdi = rankToString(card.r);
+	string kort = verdi + " of " + farge;
+	return kort;
+}
+
+string toStringShort(CardStruct card)
+{	
+	string farge = suitToString(card.s);
+	char a = farge.at(0);
+	int b = int(card.r) +2;
+	string r = to_string(b);
+	string kort = a + r;
+	return kort;
+}
+
+class Card {
+private:
+	Suit s;
+	Rank r;
+	bool valid;
+public:
+	Card() {
+
+	}
+	Card(Suit suit, Rank rank)
+		:s{ suit }, r{ rank }
+	{
+	}
+	string typesuit;
+	string suit() {
+		string typesuit = suitToString(s);
+		return typesuit;
+	}
+	string typerank;
+	string rank() {
+		typerank = rankToString(r);
+		return typerank;
+	}
+	bool isValid() {
+		if (typesuit.empty()==true) {
+			return false;
+		}
+		if (typerank.empty()==true) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	string toStringShort() {
+		if (isValid() == true) {
+			string farge = suitToString(s);
+			char a = farge.at(0);
+			int b = int(r) + 2;
+			string r = to_string(b);
+			string kort = a + r;
+			return kort;
+		}
+		if (isValid() == false) {
+			cout << "\nUgyldig kort\n";
+		}
+	}
+};
